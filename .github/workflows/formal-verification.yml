@@ -75,4 +75,16 @@ jobs:
       max-parallel: 16
       matrix:
         patch: ${{ fromJson(needs.list-patches.outputs.matrix) }} 
-        rule: ${{ fromJson(needs.list-confs.outputs.matrix) }} 
+        rule: 
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule zeroAddressRewardUnchanged
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule rewardsTwoByAssetAreInList
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule assetsTwoClaimAllRewards
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule availableRewardsCountProperties
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule zeroAddressAssetUnchanged
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule timestamp
+          - certora/conf/verifyRewardsController_multiReward_verified.conf --rule assetsTwoClaimRewards
+          - certora/conf/verifyRewardsController_multiReward_slow_verified.conf --rule rewardsTwoClaimAllRewardsToSelfAsExpected
+          - certora/conf/verifyRewardsController_multiReward_slow_verified.conf --rule setupAssetsAdded
+          - certora/conf/verifyRewardsController_multiReward_slow_verified.conf --rule rewardEnabled
+          - certora/conf/verifyRewardsController_multiReward_slow_verified.conf --rule setupAssetImmutable
+          - certora/conf/verifyRewardsController_multiReward_slow_verified.conf --rule rewardsTwoClaimAllRewardsOnBehalfAsExpected
